@@ -1,0 +1,29 @@
+
+<!doctype html> 
+<html lang='en'> 
+    <head> 
+    <title>
+    Home
+    </title>
+</head>
+
+<body>
+
+    <h1>ToDo </h1>
+    <form method="POST" action="/addtask">
+        <label>ToDo list</label><br />
+        <input type="text" name="text"><br /><br>
+        <input type="submit">
+       <p>your task</p>
+    </form>
+    <ol>
+    {{range .}}
+    <li>{{.Text}}</li>
+<form method="POST" action="/deletetask">
+<input type="hidden" name="id" value={{.Id}}> 
+        <input type="submit" value="Remove"/>
+        {{end}}
+    </ol>
+    </form>
+    </body>
+</html> 
