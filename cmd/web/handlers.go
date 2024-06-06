@@ -25,13 +25,16 @@ type Task struct {
 func (app *application) form(w http.ResponseWriter, r *http.Request) {
 	s, err := app.todos.Latest()
 	if err != nil {
-		http.Error(w, "Internal Server Error...", 500)
+		http.Error(w, "Internal Server Error..", 500)
 		return
 	}
 
 	//panic("An Error Happened")
 
-	files := []string{"./ui/html/forms.page.tmpl"}
+	files := []string{
+		"./ui/html/forms.page.tmpl",
+	
+	}
 	ts, err := template.ParseFiles(files...)
 	if err != nil {
 		app.errorLog.Println(err.Error())
@@ -39,13 +42,13 @@ func (app *application) form(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err = ts.Execute(w, struct {
-        Tasks []*models.Todo
-        Flash string
-    }{
-        Tasks: s,
-        Flash: app.session.PopString(r, "flash"),
-    })
-	
+		Tasks []*models.Todo
+		Flash string
+	}{
+		Tasks: s,
+		Flash: app.session.PopString(r, "flash"),
+	})
+
 	if err != nil {
 		app.errorLog.Println(err.Error())
 		http.Error(w, "Internal Server Error...", 500)
@@ -76,7 +79,7 @@ func (app *application) addtask(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
 		// app.clientError(w, http.StatusBadRequest)
-		http.Error(w, "Method not allowed123", 400)
+		http.Error(w, "Method not allowed12", 400)
 		return
 	}
 
@@ -91,16 +94,14 @@ func (app *application) addtask(w http.ResponseWriter, r *http.Request) {
 	} else if utf8.RuneCountInString(title) > 50 {
 		//errors["title"] = "This field is too long (maximum is 50 characters)"
 		app.session.Put(r, "flash", "This field cannot be blank!")
-	}else{
+	} else {
 		_, errInsert := app.todos.Insert(title)
-	if errInsert != nil {
-		//app.serverError(w, err)
-
-		http.Error(w, "Method not allowed...", 400)
-		return
-	}else{
-		app.session.Put(r, "flash", "Todo successfully created!")
-	}
+		if errInsert != nil {
+			http.Error(w, "Method not allowed..", 400)
+			return
+		} else {
+			app.session.Put(r, "flash", "Todo successfully created!")
+		}
 	}
 
 	// if strings.TrimSpace(expires) == "" {
@@ -144,10 +145,9 @@ func (app *application) deletetask(w http.ResponseWriter, r *http.Request) {
 
 		http.Error(w, "Method not allowed...", 400)
 		return
-	}else{
+	} else {
 		app.session.Put(r, "flash", "Todo successfully deleted!")
 	}
-	
 	//redirecting to the same page
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
@@ -176,7 +176,7 @@ func (app *application) getsingle(w http.ResponseWriter, r *http.Request) {
 func (app *application) update(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.FormValue("ID"))
 	name := r.FormValue("update")
-	
+
 	// if err != nil {
 	// 	http.Error(w, "Internal Server Error...", 500)
 	// 	return
@@ -184,18 +184,75 @@ func (app *application) update(w http.ResponseWriter, r *http.Request) {
 	if strings.TrimSpace(name) == "" {
 		//errors["title"] = "This field cannot be blank"
 		app.session.Put(r, "flash", "This field cannot be blank!")
-	}else{
+	} else {
 		err := app.todos.Update(id, name)
-	if err != nil {
-		//app.serverError(w, err)
+		if err != nil {
+			//app.serverError(w, err)
 
-		http.Error(w, "Method not allowed...", 400)
-		return
-	}else{
-		app.session.Put(r, "flash", "Todo successfully updated!")
-	}
+			http.Error(w, "Method not allowed...", 400)
+			return
+		} else {
+			app.session.Put(r, "flash", "Todo successfully updated!")
+		}
 	}
 	//redirecting to the same page
 	http.Redirect(w, r, "/", http.StatusSeeOther)
+}
+func (app *application) signupUserForm(w http.ResponseWriter, r *http.Request) {
+	//log.Println("ejgfhgrfhe")
+	files := []string{
+		"./ui/html/signup.page.tmpl",
+		"./ui/html/base.layout.tmpl",
+	}
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		app.errorLog.Println(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
+	ts.Execute(w, nil)
 
+}
+func (app *application) signupUser(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		// app.clientError(w, http.StatusBadRequest)
+		http.Error(w, "Method not allowed123", 400)
+		return
+	}
+	name := r.PostForm.Get("name")
+	//log.Println(name)
+	email := r.PostForm.Get("email")
+	//log.Println(email)
+	password := r.PostForm.Get("password")
+	//log.Println(password)
+
+	errr := app.users.Insert(name,email,password)	
+	log.Println(errr)
+		if errr != nil {
+			http.Error(w, "Method not allowed", 400)
+			return
+	}
+	http.Redirect(w, r, "/", http.StatusSeeOther)
+	//fmt.Fprintln(w, "Create a new user...")
+}
+func (app *application) loginUserForm(w http.ResponseWriter, r *http.Request) {
+	files := []string{
+		"./ui/html/login.page.tmpl",
+		"./ui/html/base.layout.tmpl",
+	}
+	ts, err := template.ParseFiles(files...)
+	if err != nil {
+		app.errorLog.Println(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
+	ts.Execute(w, nil)
+
+}
+	
+func (app *application) loginUser(w http.ResponseWriter, r *http.Request) {
+
+	fmt.Fprintln(w, "Authenticate and login the user...")
+}
+func (app *application) logoutUser(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "Logout the user...")
 }

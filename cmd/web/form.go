@@ -6,38 +6,38 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"todo/pkg/models/mysql"
 	"time"
+	"todo/pkg/models/mysql"
 
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/golangcollege/sessions" 
+	"github.com/golangcollege/sessions"
 )
 
-type Config struct{
-	Addr string
+type Config struct {
+	Addr      string
 	StaticDir string
-	Dsn string
-	Session string
+	Dsn       string
+	Session   string
 }
-
 
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
-	config *Config
+	config   *Config
 	todos    *mysql.TodoModel
-	session       *sessions.Session 
+	session  *sessions.Session
+	users    *mysql.UserModel
 }
 
 func main() {
 	//created a new config so that the default values can be used if we haven't given the port address, server route and db
 	config := new(Config)
-	flag.StringVar(&config.Addr,"addr",":4000", "Default HTTP network address")
-	flag.StringVar(&config.StaticDir, "static-dir", "./ui/static","Path to static access")
-	flag.StringVar(&config.Dsn, "dsn","root:root@/todo?parseTime=true", "MySQL database")
-	flag.StringVar(&config.Session,"secret", "s6Ndh+pPbnzHbS*+9Pk8qGWhTzbpa@ge", "Secret Session")
+	flag.StringVar(&config.Addr, "addr", ":4000", "Default HTTP network address")
+	flag.StringVar(&config.StaticDir, "static-dir", "./ui/static", "Path to static access")
+	flag.StringVar(&config.Dsn, "dsn", "root:root@/todo?parseTime=true", "MySQL database")
+	flag.StringVar(&config.Session, "secret", "s6Ndh+pPbnzHbS*+9Pk8qGWhTzbpa@ge", "Secret Session")
 	flag.Parse()
- 
+
 	//creating a new log infoLog
 	f, err := os.OpenFile("./info.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
@@ -49,7 +49,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
+
 	//creating a new log for error
 	errorLog := log.New(el, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
@@ -59,21 +59,24 @@ func main() {
 	}
 	defer db.Close()
 
-	session := sessions.New([]byte(*&config.Session)) 
+	session := sessions.New([]byte(config.Session))
 	session.Lifetime = 12 * time.Hour
+	session.Secure = true
+
 	app := &application{
 		errorLog: errorLog,
 		infoLog:  infoLog,
-		session: session,
+		session:  session,
 		todos:    &mysql.TodoModel{DB: db},
-		config : config,
+		config:   config,
+		users:    &mysql.UserModel{DB: db},
 	}
 	// srv := &http.Server{
 	// 	Addr:     *addr,
 	// 	ErrorLog: errorLog,
 	// 	Handler:  app.routes(),
 	// }
-	
+
 	infoLog.Printf("Starting server on %s", app.config.Addr)
 	err = http.ListenAndServe(app.config.Addr, app.routes())
 	log.Fatal(err)

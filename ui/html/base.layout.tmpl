@@ -1,0 +1,30 @@
+{{define "base"}}
+<!doctype html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>{{template "title" .}} - Todo</title>
+</head>
+<body>
+{{template "header" .}}
+    <header>
+        <h1><a href='/'>Todo List</a></h1>
+    </header>
+    <nav>
+        <div>
+            <a href='/'>Home</a>
+        </div>
+        <div>
+            <a href='/user/signup'>Signup</a>
+            <a href='/user/login'>Login</a>
+            <form action='/user/logout' method='POST'>
+                <button>Logout</button>
+            </form>
+        </div>
+    </nav>
+    {{template "body" .}}
+    {{template "footer" .}}
+        <script src="/static/js/main.js" type="text/javascript"></script>
+</body>
+</html>
+{{end}}

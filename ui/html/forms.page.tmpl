@@ -2,38 +2,52 @@
 <!doctype html> 
 <html lang='en'> 
     <head> 
-    <title>
-    Home
-    </title>
-</head>
-
-<body>
-
-    <h1>ToDo </h1>
+        <title> Home </title>
+    </head>
+    <body>
+        {{define "header"}}
+        <header>
+            <h1><a href='/'>Todo</a></h1>
+        </header> 
+        {{end}}
+        <nav>
+            <div>
+                <a href='/'>Home</a>
+            </div>
+            <div>
+                <a href='/user/signup'>Signup</a><br>
+                <a href='/user/login'>Login</a><br>
+                <form action='/user/logout' method='POST'><br>
+                    <button>Logout</button>
+                </form>
+            </div>
+        </nav>
+    <br><br>
+    <!-- <h1>ToDo </h1> -->
     <form method="POST" action="/addtask">
         <label>ToDo list</label><br />
-        <input type="text" name="text">
-        <input type="submit"><br /><br>
+            <input type="text" name="text">
+            <input type="submit"><br /><br>
         {{if .Flash}}
-    <div class="flash">
-    {{.Flash}}
-    </div>
-    {{end}}
+            <div class="flash">
+                {{.Flash}}
+            </div>
+        {{end}}
        <p>your task</p>
     </form>
     <ol>
     {{range .Tasks}}
-    <li>{{.Title}}</li>
-<form method="POST" action="/deletetask">
-<input type="hidden" name="ID" value={{.ID}}> 
-        <input type="submit" value="Remove"/>
+        <li>{{.Title}}</li>
+        <form method="POST" action="/deletetask">
+            <input type="hidden" name="ID" value={{.ID}}> 
+            <input type="submit" value="Remove"/>
         </form>
         <form method="POST" action="/update">
-        <input type="hidden" name="ID" value={{.ID}}>
-        <input type="submit" value="Update"/>
-        <input type="text" name="update">
+            <input type="hidden" name="ID" value={{.ID}}>
+            <input type="submit" value="Update"/>
+            <input type="text" name="update">
         </form>
-        {{end}}
+    {{end}}
     </ol>
     
     </body>
