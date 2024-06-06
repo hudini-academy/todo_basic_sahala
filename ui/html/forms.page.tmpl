@@ -12,18 +12,29 @@
     <h1>ToDo </h1>
     <form method="POST" action="/addtask">
         <label>ToDo list</label><br />
-        <input type="text" name="text"><br /><br>
-        <input type="submit">
+        <input type="text" name="text">
+        <input type="submit"><br /><br>
+        {{if .Flash}}
+    <div class="flash">
+    {{.Flash}}
+    </div>
+    {{end}}
        <p>your task</p>
     </form>
     <ol>
-    {{range .}}
-    <li>{{.Text}}</li>
+    {{range .Tasks}}
+    <li>{{.Title}}</li>
 <form method="POST" action="/deletetask">
-<input type="hidden" name="id" value={{.Id}}> 
+<input type="hidden" name="ID" value={{.ID}}> 
         <input type="submit" value="Remove"/>
+        </form>
+        <form method="POST" action="/update">
+        <input type="hidden" name="ID" value={{.ID}}>
+        <input type="submit" value="Update"/>
+        <input type="text" name="update">
+        </form>
         {{end}}
     </ol>
-    </form>
+    
     </body>
 </html> 

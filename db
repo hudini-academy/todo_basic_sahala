@@ -1,0 +1,13 @@
+INSERT INTO todos(title,created,expires) VALUES ( 
+    'Task 2',
+    UTC_TIMESTAMP(), 
+    DATE_ADD(UTC_TIMESTAMP(), INTERVAL 365 DAY) 
+),( 
+    'Task 3',
+    UTC_TIMESTAMP(), 
+    DATE_ADD(UTC_TIMESTAMP(), INTERVAL 365 DAY) 
+),( 
+    'Task 4',
+    UTC_TIMESTAMP(), 
+    DATE_ADD(UTC_TIMESTAMP(), INTERVAL 365 DAY) 
+); 
