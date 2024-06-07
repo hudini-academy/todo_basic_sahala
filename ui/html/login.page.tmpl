@@ -2,8 +2,6 @@
 {{define "title"}}Login{{end}}
 {{define "body"}}
     <form action='/user/login' method='POST' novalidate>
-        <div class='error'>{{.}}</div>
-{{end}}
             <div>
                 <label>Email:</label>
                 <input type='email' name='email' value='{{.Get "email"}}'>
@@ -15,6 +13,6 @@
             <div>
                 <input type='submit' value='Login'>
             </div>
-{{end}}
     </form>
 {{end}}
+{{define "footer"}} {{end}}

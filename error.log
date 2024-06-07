@@ -4,3 +4,13 @@ ERROR	2024/06/06 14:32:12 handlers.go:50: template: forms.page.tmpl:30:13: execu
 ERROR	2024/06/06 16:50:06 handlers.go:54: html/template:base.layout.tmpl:28:15: no such template "footer"
 ERROR	2024/06/06 18:29:33 handlers.go:245: template: login.page.tmpl:18: unexpected {{end}}
 ERROR	2024/06/06 18:29:47 handlers.go:245: template: login.page.tmpl:18: unexpected {{end}}
+ERROR	2024/06/06 18:58:52 handlers.go:245: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:01:32 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:01:41 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:04:47 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:07:07 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:08:13 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:11:03 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:13:24 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:15:48 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command
+ERROR	2024/06/06 19:18:29 handlers.go:246: template: login.page.tmpl:4: unexpected <define> in command

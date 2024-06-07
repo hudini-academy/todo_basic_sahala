@@ -71,11 +71,7 @@ func main() {
 		config:   config,
 		users:    &mysql.UserModel{DB: db},
 	}
-	// srv := &http.Server{
-	// 	Addr:     *addr,
-	// 	ErrorLog: errorLog,
-	// 	Handler:  app.routes(),
-	// }
+	
 
 	infoLog.Printf("Starting server on %s", app.config.Addr)
 	err = http.ListenAndServe(app.config.Addr, app.routes())

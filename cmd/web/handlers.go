@@ -136,13 +136,8 @@ func (app *application) addtask(w http.ResponseWriter, r *http.Request) {
 func (app *application) deletetask(w http.ResponseWriter, r *http.Request) {
 	ids, _ := strconv.Atoi(r.FormValue("ID"))
 	_, err := app.todos.Delete(ids)
-	// if err != nil {
-	// 	http.Error(w, "Internal Server Error...", 500)
-	// 	return
-	// }
-	if err != nil {
-		//app.serverError(w, err)
 
+	if err != nil {
 		http.Error(w, "Method not allowed...", 400)
 		return
 	} else {
@@ -170,8 +165,7 @@ func (app *application) getsingle(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%v", s)
 }
 
-//redirecting to the same page
-//http.Redirect(w, r, "/", http.StatusSeeOther)
+
 
 func (app *application) update(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.FormValue("ID"))
@@ -199,7 +193,6 @@ func (app *application) update(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 }
 func (app *application) signupUserForm(w http.ResponseWriter, r *http.Request) {
-	//log.Println("ejgfhgrfhe")
 	files := []string{
 		"./ui/html/signup.page.tmpl",
 		"./ui/html/base.layout.tmpl",
@@ -215,24 +208,29 @@ func (app *application) signupUserForm(w http.ResponseWriter, r *http.Request) {
 func (app *application) signupUser(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
-		// app.clientError(w, http.StatusBadRequest)
 		http.Error(w, "Method not allowed123", 400)
 		return
 	}
-	name := r.PostForm.Get("name")
-	//log.Println(name)
-	email := r.PostForm.Get("email")
-	//log.Println(email)
-	password := r.PostForm.Get("password")
-	//log.Println(password)
+	
+	useremail := r.PostForm.Get("email")
+	userpassword := r.PostForm.Get("password")
 
-	errr := app.users.Insert(name,email,password)	
-	log.Println(errr)
-		if errr != nil {
-			http.Error(w, "Method not allowed", 400)
-			return
-	}
-	http.Redirect(w, r, "/", http.StatusSeeOther)
+	isUser,err := app.users.Authenticate(useremail,userpassword)
+if err != nil {
+    app.errorLog.Println(err.Error())
+    http.Error(w, "Internal Server error", 500)
+}
+if isUser{
+    app.session.Put(r,"Authenticated",true)
+    app.session.Put(r,"Flash","Login successfully")
+    http.Redirect(w, r, "/", http.StatusSeeOther)
+}else{
+    app.session.Put(r,"Flash","Login failed")  
+    http.Redirect(w, r, "/user/login", http.StatusSeeOther)
+    app.session.Put(r,"Authenticated",false)
+}
+	
+	
 	//fmt.Fprintln(w, "Create a new user...")
 }
 func (app *application) loginUserForm(w http.ResponseWriter, r *http.Request) {
@@ -241,17 +239,43 @@ func (app *application) loginUserForm(w http.ResponseWriter, r *http.Request) {
 		"./ui/html/base.layout.tmpl",
 	}
 	ts, err := template.ParseFiles(files...)
+	log.Println(ts)
 	if err != nil {
 		app.errorLog.Println(err.Error())
 		http.Error(w, "Internal Server Error", 500)
+		return
 	}
 	ts.Execute(w, nil)
 
 }
 	
 func (app *application) loginUser(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		// app.clientError(w, http.StatusBadRequest)
+		http.Error(w, "Method not allowed123", 400)
+		return
+	}
+	email := r.PostForm.Get("email")
+	//log.Println(email)
+	password := r.PostForm.Get("password")
+	//log.Println(password)
 
-	fmt.Fprintln(w, "Authenticate and login the user...")
+	isUser,err := app.users.Authenticate(email,password)
+if err != nil {
+    app.errorLog.Println(err.Error())
+    http.Error(w, "Internal Server error", 500)
+}
+if isUser{
+    app.session.Put(r,"Authenticated",true)
+    app.session.Put(r,"Flash","Login successfully")
+    http.Redirect(w, r, "/", http.StatusSeeOther)
+}else{
+    app.session.Put(r,"Flash","Login failed")  
+    http.Redirect(w, r, "/user/login", http.StatusSeeOther)
+    app.session.Put(r,"Authenticated",false)
+}
+	//fmt.Fprintln(w, "Authenticate and login the user...")
 }
 func (app *application) logoutUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(w, "Logout the user...")

@@ -42,8 +42,7 @@ func (app *application) recoverPanic(next http.Handler) http.Handler {
 			if err := recover(); err != nil {
 				// Set a "Connection: close" header on the response.
 				w.Header().Set("Connection", "close")
-				// Call the app.serverError helper method to return a 500
-				// Internal Server response.
+				
 				http.Error(w, fmt.Sprintf("%s", err), 500)
 			}
 		}()

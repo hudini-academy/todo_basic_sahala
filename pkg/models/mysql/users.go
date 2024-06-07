@@ -23,10 +23,16 @@ func (m *UserModel) Insert(name, email, password string) error {
 // We'll use the Authenticate method to verify whether a user exists with
 // the provided email address and password. This will return the relevant
 // user ID if they do.
-func (m *UserModel) Authenticate(email, password string) (int, error) {
-	
-	return 0, nil
+func (m *UserModel) Authenticate(email, password string) (bool, error) {
+	stmt:=`SELECT id from users where email =? and hashed_password = ?`
+	rows, err := m.DB.Query(stmt, email, password )
+    if err != nil {
+        return  false,err
+    }
+    defer rows.Close()
+    return rows.Next(),nil
 }
+
 
 // We'll use the Get method to fetch details for a specific user based
 // on their user ID.

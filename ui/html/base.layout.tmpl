@@ -6,7 +6,8 @@
 <title>{{template "title" .}} - Todo</title>
 </head>
 <body>
-{{template "header" .}}
+{{template "body" .}}
+
     <header>
         <h1><a href='/'>Todo List</a></h1>
     </header>
@@ -22,7 +23,6 @@
             </form>
         </div>
     </nav>
-    {{template "body" .}}
     {{template "footer" .}}
         <script src="/static/js/main.js" type="text/javascript"></script>
 </body>
