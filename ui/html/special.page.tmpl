@@ -1,0 +1,33 @@
+<!doctype html> 
+<html lang='en'> 
+    <head> 
+        <title> Home </title>
+    </head>
+    <body>
+        {{define "header"}}
+        <header>
+            <h1><a href='/'>Special</a></h1>
+        </header> 
+        {{end}}
+        <form method="POST" action="/user/special">
+            <label>ToDo list</label><br />
+                <input type="text" name="text">
+                <input type="submit"><br /><br>
+                    {{if .Flash}}
+                        <div class="flash">
+                            {{.Flash}}
+                        </div>
+                    {{end}}
+                    <p>your special tasks</p>
+        </form>
+        <ol>
+            {{range .Tasks}}
+                <li>{{.Title}}</li>
+                <form method="POST" action="/user/special">
+                    <input type="hidden" name="title" value={{.Title}}> 
+                    <input type="submit" value="Remove"/>
+                </form>
+            {{end}}
+        </ol>
+    </body>
+</html> 

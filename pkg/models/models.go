@@ -25,3 +25,10 @@ type User struct {
     HashedPassword []byte
     Created time.Time
     }
+
+type Special struct{
+    ID      int 
+    Title   string  
+    Created time.Time 
+    Expires time.Time 
+}

@@ -8,7 +8,6 @@ import (
 	"os"
 	"time"
 	"todo/pkg/models/mysql"
-
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/golangcollege/sessions"
 )
@@ -27,6 +26,7 @@ type application struct {
 	todos    *mysql.TodoModel
 	session  *sessions.Session
 	users    *mysql.UserModel
+	specials  *mysql.SpecialModel
 }
 
 func main() {
@@ -70,6 +70,7 @@ func main() {
 		todos:    &mysql.TodoModel{DB: db},
 		config:   config,
 		users:    &mysql.UserModel{DB: db},
+		specials: &mysql.SpecialModel{DB:db},  // added database 
 	}
 	
 
