@@ -334,9 +334,10 @@ func (app *application) specialadd(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, "/user/special", http.StatusSeeOther)
 }
-
+//created a delete function to delete from the special table
 func (app *application) specialdelete(w http.ResponseWriter, r *http.Request) {
 
+	//delete by title from specials table using the delete function
 	name := r.FormValue("title")
 	_, err := app.specials.Delete(name)
 	if err != nil {
