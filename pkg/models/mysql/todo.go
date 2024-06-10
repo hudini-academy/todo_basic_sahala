@@ -112,9 +112,9 @@ func (m *TodoModel) Latest() ([]*models.Todo, error) {
 	return todos, nil
 }
 
-func (m *TodoModel) Delete(id int) (*models.Todo, error) {
+func (m *TodoModel) Delete(id string) (*models.Todo, error) {
 	stmt := `DELETE FROM todos 
-	WHERE id = ?`
+	WHERE title = ?`
 
 	_, err := m.DB.Exec(stmt, id)
 	if err != nil {

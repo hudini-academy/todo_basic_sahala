@@ -40,7 +40,7 @@
     {{range .Tasks}}
         <li>{{.Title}}</li>
         <form method="POST" action="/deletetask">
-            <input type="hidden" name="ID" value={{.ID}}> 
+            <input type="hidden" name="name" value={{.Title}}> 
             <input type="submit" value="Remove"/>
         </form>
         <form method="POST" action="/update">

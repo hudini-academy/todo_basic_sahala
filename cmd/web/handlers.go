@@ -79,52 +79,29 @@ func (app *application) addtask(w http.ResponseWriter, r *http.Request) {
 		if errInsert != nil {
 			http.Error(w, "Method not allowed..", 400)
 			return
-		}else if err !=nil{
+		} else if err != nil {
 			http.Error(w, "Method not allowed", 400)
 		} else {
 			app.session.Put(r, "flash", "Todo successfully created!")
 		}
-	}else{
+	} else {
 		_, errInsert := app.todos.Insert(title)
 		if errInsert != nil {
 			http.Error(w, "Method not allowed..", 400)
 			return
-		}else {
+		} else {
 			app.session.Put(r, "flash", "Todo successfully created!")
 		}
 	}
-	// if strings.TrimSpace(expires) == "" {
-	// 	errors["expires"] = "This fied cannot be blank"
-	// 	} else if expires != "365" && expires != "7" && expires != "1" {
-	// 	errors["expires"] = "This field is invalid"
-	// 	}
-	// if len(errors) > 0 {
-	// 	fmt.Fprint(w, errors)
-	// 	return
-	// }
+	
 	http.Redirect(w, r, "/", http.StatusSeeOther) //fmt.Sprintf("/addtask/%d", id)
 }
 
-// id++
-// todo := Task{
-// 	Text: r.FormValue("text"),
-// 	Id:   id,
-// }
-// allTask = append(allTask, todo)
-// //redirecting to the same page
-// _, err := app.todos.Insert(todo.Text)
-// if err != nil {
-// 	app.errorLog.Println(err.Error())
-// 	return
-// }
-
-// 	http.Redirect(w, r, "/", http.StatusSeeOther)
-// }
 
 // create a function to remove the specified task from the slice
 func (app *application) deletetask(w http.ResponseWriter, r *http.Request) {
-	ids, _ := strconv.Atoi(r.FormValue("ID"))
-	
+	ids := r.FormValue("title")
+
 	_, err := app.todos.Delete(ids)
 
 	if err != nil {
@@ -137,32 +114,27 @@ func (app *application) deletetask(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusSeeOther)
 
 }
-
-// func (app *application) getsingle(w http.ResponseWriter, r *http.Request) {
-// 	id, err := strconv.Atoi(r.URL.Query().Get("id"))
-// 	if err != nil || id < 1 {
-// 		http.Error(w, "Internal Server Error", 500)
-// 		return
-// 	}
-// 	s, err := app.todos.Get(id)
-// 	if err == models.ErrNoRecord {
-// 		http.Error(w, "Internal Server Error", 500)
-// 		return
-// 	} else if err != nil {
-// 		http.Error(w, "Internal Server Error", 500)
-// 		return
-// 	}
-// 	fmt.Fprintf(w, "%v", s)
-// }
+//function to get details of single data
+func (app *application) getsingle(w http.ResponseWriter, r *http.Request) {
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil || id < 1 {
+		http.Error(w, "Internal Server Error", 500)
+		return
+	}
+	s, err := app.todos.Get(id)
+	if err == models.ErrNoRecord {
+		http.Error(w, "Internal Server Error", 500)
+		return
+	} else if err != nil {
+		http.Error(w, "Internal Server Error", 500)
+		return
+	}
+	fmt.Fprintf(w, "%v", s)
+}
 
 func (app *application) update(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(r.FormValue("ID"))
 	name := r.FormValue("update")
-
-	// if err != nil {
-	// 	http.Error(w, "Internal Server Error...", 500)
-	// 	return
-	// }
 	if strings.TrimSpace(name) == "" {
 		//errors["title"] = "This field cannot be blank"
 		app.session.Put(r, "flash", "This field cannot be blank123")
@@ -300,46 +272,19 @@ func (app *application) specialForm(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Internal Server Error...", 500)
 	}
 }
+
 // created function to take it into db named special
-func (app *application) specialadd(w http.ResponseWriter, r *http.Request) {
-
-	err := r.ParseForm()
-	if err != nil {
-		http.Error(w, "Method not allowed12", 400)
-		return
-	}
-
-	title := r.PostForm.Get("text")
-
-	if strings.TrimSpace(title) == "" {
-		//errors["title"] = "This field cannot be blank"
-		app.session.Put(r, "flash", "This field cannot be blank!")
-	} else if utf8.RuneCountInString(title) > 50 {
-		//errors["title"] = "This field is too long (maximum is 50 characters)"
-		app.session.Put(r, "flash", "This field cannot be blank!!!!")
-		//checking whether the name contains the substring "special:"
-		//if yes added it to the specials table and todo table
-	} else if strings.Contains(title, "special:") {
-		_, errInsert := app.specials.Insert(title)
-		_, err := app.todos.Insert(title)
-		if err != nil {
-			http.Error(w, "Method not allowed", 400)
-		}
-		if errInsert != nil {
-			http.Error(w, "Method not allowed..", 400)
-			return
-		}
-		app.session.Put(r, "flash", "Special successfully created!")
-
-	}
-	http.Redirect(w, r, "/user/special", http.StatusSeeOther)
-}
-//created a delete function to delete from the special table
+// created a delete function to delete from the special table
 func (app *application) specialdelete(w http.ResponseWriter, r *http.Request) {
 
 	//delete by title from specials table using the delete function
 	name := r.FormValue("title")
 	_, err := app.specials.Delete(name)
+	_,error := app.todos.Delete(name)
+	if error != nil{
+		http.Error(w,"Method not allowed!!!!",400)
+		return
+	}
 	if err != nil {
 		http.Error(w, "Method not allowed...", 400)
 		return

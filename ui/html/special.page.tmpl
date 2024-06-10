@@ -11,8 +11,6 @@
         {{end}}
         <form method="POST" action="/user/special">
             <label>ToDo list</label><br />
-                <input type="text" name="text">
-                <input type="submit"><br /><br>
                     {{if .Flash}}
                         <div class="flash">
                             {{.Flash}}
@@ -23,7 +21,7 @@
         <ol>
             {{range .Tasks}}
                 <li>{{.Title}}</li>
-                <form method="POST" action="/user/special">
+                <form method="POST" action="/user/special/delete">
                     <input type="hidden" name="title" value={{.Title}}> 
                     <input type="submit" value="Remove"/>
                 </form>

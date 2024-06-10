@@ -828,3 +828,93 @@ INFO	2024/06/07 15:33:10 [::1]:57553 - HTTP/1.1 GET /
 INFO	2024/06/07 15:33:20 [::1]:57553 - HTTP/1.1 GET /user/special
 INFO	2024/06/07 15:33:22 [::1]:57553 - HTTP/1.1 POST /user/special
 INFO	2024/06/07 15:33:22 [::1]:57553 - HTTP/1.1 GET /user/special
+INFO	2024/06/07 15:49:09 Starting server on :4000
+INFO	2024/06/07 15:49:19 [::1]:58699 - HTTP/1.1 GET /
+INFO	2024/06/07 15:49:23 [::1]:58699 - HTTP/1.1 POST /deletetask
+INFO	2024/06/07 15:49:23 [::1]:58699 - HTTP/1.1 GET /
+INFO	2024/06/07 15:49:26 [::1]:58699 - HTTP/1.1 POST /deletetask
+INFO	2024/06/07 15:49:26 [::1]:58699 - HTTP/1.1 GET /
+INFO	2024/06/07 15:49:29 [::1]:58699 - HTTP/1.1 GET /user/special
+INFO	2024/06/07 15:49:31 [::1]:58699 - HTTP/1.1 POST /user/special
+INFO	2024/06/07 15:49:31 [::1]:58699 - HTTP/1.1 GET /user/special
+INFO	2024/06/07 15:50:55 Starting server on :4000
+INFO	2024/06/07 15:51:06 [::1]:58762 - HTTP/1.1 GET /
+INFO	2024/06/07 15:51:09 [::1]:58762 - HTTP/1.1 GET /user/special
+INFO	2024/06/07 15:51:15 [::1]:58762 - HTTP/1.1 POST /user/special
+INFO	2024/06/07 15:51:15 [::1]:58762 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:55:58 Starting server on :4000
+INFO	2024/06/10 11:56:15 [::1]:63894 - HTTP/1.1 GET /
+INFO	2024/06/10 11:56:16 [::1]:63894 - HTTP/1.1 GET /favicon.ico
+INFO	2024/06/10 11:56:18 [::1]:63894 - HTTP/1.1 POST /deletetask
+INFO	2024/06/10 11:56:18 [::1]:63894 - HTTP/1.1 GET /
+INFO	2024/06/10 11:56:21 [::1]:63894 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:56:23 [::1]:63894 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 11:56:23 [::1]:63894 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:56:24 [::1]:63894 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 11:56:24 [::1]:63894 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:56:28 [::1]:63894 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 11:56:28 [::1]:63894 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:56:53 Starting server on :4000
+INFO	2024/06/10 11:57:02 [::1]:63902 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:57:04 [::1]:63902 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 11:57:04 [::1]:63902 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:57:08 [::1]:63902 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 11:57:08 [::1]:63902 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:57:09 [::1]:63902 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 11:57:09 [::1]:63902 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:57:10 [::1]:63902 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 11:57:10 [::1]:63902 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 11:57:10 [::1]:63902 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 11:57:10 [::1]:63902 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:06:58 Starting server on :4000
+INFO	2024/06/10 12:07:09 [::1]:63938 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:07:10 [::1]:63938 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:07:10 [::1]:63938 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:08:30 [::1]:63938 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:08:30 [::1]:63938 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:08:32 [::1]:63938 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:08:32 [::1]:63938 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:08:35 [::1]:63938 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:14:44 Starting server on :4000
+INFO	2024/06/10 12:14:55 [::1]:63972 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:15:00 [::1]:63972 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:15:00 [::1]:63972 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:15:03 [::1]:63972 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:15:03 [::1]:63972 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:15:24 [::1]:63972 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:15:24 [::1]:63972 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:18:57 Starting server on :4000
+INFO	2024/06/10 12:19:05 [::1]:64095 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:19:08 [::1]:64095 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:19:12 [::1]:64095 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:21:33 Starting server on :4000
+INFO	2024/06/10 12:21:47 [::1]:64176 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:25:43 Starting server on :4000
+INFO	2024/06/10 12:25:53 [::1]:64313 - HTTP/1.1 POST /user/special
+INFO	2024/06/10 12:25:59 [::1]:64313 - HTTP/1.1 GET /
+INFO	2024/06/10 12:26:02 [::1]:64313 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:26:04 [::1]:64313 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 12:26:04 [::1]:64313 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:26:07 [::1]:64313 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 12:26:07 [::1]:64313 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:26:09 [::1]:64313 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 12:26:09 [::1]:64313 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:26:14 [::1]:64313 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 12:26:14 [::1]:64313 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:27:08 [::1]:64313 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:27:13 [::1]:64313 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 12:27:13 [::1]:64313 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 12:27:16 [::1]:64313 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 12:27:16 [::1]:64313 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 14:49:23 [::1]:65074 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 14:49:23 [::1]:65074 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 14:50:28 [::1]:65074 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 14:50:36 [::1]:65074 - HTTP/1.1 GET /
+INFO	2024/06/10 14:50:41 [::1]:65074 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 14:50:47 [::1]:65074 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 14:50:47 [::1]:65074 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 14:50:49 [::1]:65074 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 14:50:49 [::1]:65074 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 14:50:51 [::1]:65074 - HTTP/1.1 POST /user/special/delete
+INFO	2024/06/10 14:50:51 [::1]:65074 - HTTP/1.1 GET /user/special
+INFO	2024/06/10 14:50:56 [::1]:65074 - HTTP/1.1 GET /
